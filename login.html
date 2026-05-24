@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Login - X</title>
+    <style>
+        /* RESET — minimal, clean, no extra features except specified */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* main container: plain card, exactly the described fields */
+        .login-container {
+            max-width: 420px;
+            width: 100%;
+            background: #fff;
+            border-radius: 0;
+            padding: 0;
+            box-shadow: none;
+        }
+
+        /* Logo wrapper: X logo centered as requested */
+        .x-logo {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .x-icon {
+            width: 36px;
+            height: 36px;
+            display: block;
+        }
+
+        /* heading: exactly "Login" (without hash) */
+        .login-heading {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 28px;
+            color: #1a1a1a;
+            letter-spacing: -0.3px;
+            font-family: inherit;
+            text-align: left;
+        }
+
+        /* form group spacing */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        /* label style: "Username" and "Password" */
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #111;
+        }
+
+        /* input fields: clean border, no extra glow */
+        .form-input {
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 15px;
+            font-family: inherit;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background-color: #fff;
+            transition: border 0.1s ease;
+            outline: none;
+            color: #000;
+        }
+
+        .form-input:focus {
+            border-color: #000;
+            box-shadow: none;
+            outline: none;
+        }
+
+        /* forgot password link */
+        .forgot-link {
+            display: block;
+            text-align: left;
+            margin-top: 8px;
+            /* increased gap between forgot password and continue button */
+            margin-bottom: 32px;
+            font-size: 14px;
+        }
+
+        .forgot-link a {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .forgot-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* continue button: default state = light gray / disabled style, turns black only when email + password are filled */
+        .continue-btn {
+            width: 100%;
+            background-color: #e0e0e0;   /* disabled grayish background initially */
+            color: #6c6c6c;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 30px;          /* slightly rounded as modern style */
+            cursor: not-allowed;
+            font-family: inherit;
+            text-align: center;
+            display: inline-block;
+            margin-bottom: 24px;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            pointer-events: none;
+        }
+
+        /* active (black) state: when both fields have content */
+        .continue-btn.active {
+            background-color: #000000;
+            color: white;
+            cursor: pointer;
+            pointer-events: auto;
+        }
+
+        .continue-btn.active:hover {
+            background-color: #2c2c2c;
+        }
+
+        /* legal text exactly as in requirement */
+        .legal-text {
+            font-size: 12px;
+            color: #5e5e5e;
+            line-height: 1.4;
+            text-align: left;
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+
+        .legal-text a {
+            color: #1a1a1a;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .legal-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* no extra elements */
+        hr, .extra-div {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <!-- X logo centered: exactly as requested (logo in the middle) -->
+    <div class="x-logo">
+        <svg class="x-icon" viewBox="0 0 24 24" aria-label="X" fill="currentColor" style="color: #000000;">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+    </div>
+
+    <!-- heading: "Login" without hash (removed '#') -->
+    <h1 class="login-heading">Login</h1>
+
+    <form id="loginForm">
+        <!-- username field -->
+        <div class="form-group">
+            <label class="form-label" for="username">Username</label>
+            <input type="email" class="form-input" id="username" name="username" value="" autocomplete="username" placeholder=" ">
+        </div>
+
+        <!-- password field -->
+        <div class="form-group">
+            <label class="form-label" for="password">Password</label>
+            <input type="password" class="form-input" id="password" name="password" value="" autocomplete="current-password" placeholder=" ">
+        </div>
+
+        <!-- forgot password link -->
+        <div class="forgot-link">
+            <a href="#" aria-label="Forgot password">Forgot password?</a>
+        </div>
+
+        <!-- continue button: initially disabled (gray), turns black when both fields filled -->
+        <button type="button" id="continueBtn" class="continue-btn">Continue</button>
+
+        <!-- legal terms text -->
+        <div class="legal-text">
+            By continuing, you agree to our <a href="#">Terms of Service</a>, <a href="#">Privacy Policy</a> and <a href="#">Cookie Use</a>.
+        </div>
+    </form>
+</div>
+
+<!-- Simple JavaScript to handle button activation: turn to black only when both email and password fields have content -->
+<script>
+    (function() {
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const continueBtn = document.getElementById('continueBtn');
+
+        // Function to check inputs and toggle 'active' class on button
+        function toggleButtonState() {
+            const usernameValue = usernameInput.value.trim();
+            const passwordValue = passwordInput.value.trim();
+            
+            // Both fields must have at least one character (non-empty) to enable black button
+            if (usernameValue !== '' && passwordValue !== '') {
+                continueBtn.classList.add('active');
+            } else {
+                continueBtn.classList.remove('active');
+            }
+        }
+        
+        // Listen for input events on both fields
+        usernameInput.addEventListener('input', toggleButtonState);
+        passwordInput.addEventListener('input', toggleButtonState);
+        
+        // Optional click handler: button does nothing extra, just satisfies the static frontend requirement
+        continueBtn.addEventListener('click', function(e) {
+            if (continueBtn.classList.contains('active')) {
+                // No extra action, alerts, or submissions — purely matching the design spec
+                // The button turns black when conditions are met, that's all.
+            }
+        });
+        
+        // initial check: fields are empty, so button stays gray (disabled look)
+        toggleButtonState();
+    })();
+</script>
+</body>
+</html>
