@@ -15,7 +15,18 @@ app.use((req, res, next) => {
   if (req.path.endsWith('.mp4')) {
     const cookies = req.headers.cookie || '';
     if (!cookies.includes('auth=true')) {
-      return res.status(401).send('Unauthorized: You must be logged in to view this video.');
+      const range = req.headers.range;
+      if (range) {
+        const parts = range.replace(/bytes=/, "").split("-");
+        const start = parseInt(parts[0], 10);
+        // Allow up to 1MB for the thumbnail/metadata to load
+        if (start > 1000000) {
+          return res.status(401).send('Unauthorized: You must be logged in to view the full video.');
+        }
+      } else {
+        // Block full downloads
+        return res.status(401).send('Unauthorized: You must be logged in to view this video.');
+      }
     }
   }
   next();
