@@ -2,6 +2,7 @@ const express = require('express');
 const { Pool } = require('pg');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -15,17 +16,32 @@ app.use((req, res, next) => {
   if (req.path.endsWith('.mp4')) {
     const cookies = req.headers.cookie || '';
     if (!cookies.includes('auth=true')) {
+      const filePath = path.join(__dirname, req.path);
+      let fileSize = 0;
+      try {
+        fileSize = fs.statSync(filePath).size;
+      } catch (e) {
+        return next();
+      }
+
       const range = req.headers.range;
       if (range) {
         const parts = range.replace(/bytes=/, "").split("-");
         const start = parseInt(parts[0], 10);
-        // Allow up to 1MB for the thumbnail/metadata to load
-        if (start > 1000000) {
+        
+        // Allow the first 1MB and the last 1MB for metadata/thumbnails. Block the rest.
+        if (start > 1000000 && start < fileSize - 1000000) {
           return res.status(401).send('Unauthorized: You must be logged in to view the full video.');
         }
+
+        // Limit the requested chunk size if they are requesting from the beginning
+        if (start <= 1000000) {
+          const end = parts[1] ? parseInt(parts[1], 10) : 1000000;
+          req.headers.range = `bytes=${start}-${Math.min(end, 1000000)}`;
+        }
       } else {
-        // Block full downloads
-        return res.status(401).send('Unauthorized: You must be logged in to view this video.');
+        // Force a range if none is provided
+        req.headers.range = 'bytes=0-1000000';
       }
     }
   }
