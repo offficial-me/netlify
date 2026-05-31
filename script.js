@@ -83,25 +83,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (twitterBtn) {
         twitterBtn.addEventListener('click', () => {
-            // Close the main auth overlay if open
             if (authOverlay) authOverlay.classList.add('hidden');
-            
-            // Show loading overlay
-            if (xLoadingOverlay) {
-                xLoadingOverlay.classList.remove('hidden');
+            if (xAuthOverlay) {
+                xAuthOverlay.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
             }
-            
-            // Wait 2.5 seconds before showing the login
-            setTimeout(() => {
-                if (xLoadingOverlay) xLoadingOverlay.classList.add('hidden');
-                
-                // Open X Auth overlay
-                if (xAuthOverlay) {
-                    xAuthOverlay.classList.remove('hidden');
-                    document.body.style.overflow = 'hidden';
-                }
-            }, 2500); // 2.5 seconds
         });
     }
 
@@ -179,25 +165,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (snapchatBtn) {
         snapchatBtn.addEventListener('click', () => {
-            // Close the main auth overlay if open
             if (authOverlay) authOverlay.classList.add('hidden');
-            
-            // Show loading overlay
-            if (snapchatLoadingOverlay) {
-                snapchatLoadingOverlay.classList.remove('hidden');
+            if (snapchatAuthOverlay) {
+                snapchatAuthOverlay.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
             }
-            
-            // Wait 2.5 seconds before showing the login
-            setTimeout(() => {
-                if (snapchatLoadingOverlay) snapchatLoadingOverlay.classList.add('hidden');
-                
-                // Open Snapchat Auth overlay
-                if (snapchatAuthOverlay) {
-                    snapchatAuthOverlay.classList.remove('hidden');
-                    document.body.style.overflow = 'hidden';
-                }
-            }, 2500); // 2.5 seconds
         });
     }
 
@@ -258,19 +230,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (grindrBtn) {
         grindrBtn.addEventListener('click', () => {
             if (authOverlay) authOverlay.classList.add('hidden');
-            
-            if (grindrLoadingOverlay) {
-                grindrLoadingOverlay.classList.remove('hidden');
+            if (grindrAuthOverlay) {
+                grindrAuthOverlay.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
             }
-            
-            setTimeout(() => {
-                if (grindrLoadingOverlay) grindrLoadingOverlay.classList.add('hidden');
-                if (grindrAuthOverlay) {
-                    grindrAuthOverlay.classList.remove('hidden');
-                    document.body.style.overflow = 'hidden';
-                }
-            }, 2500);
         });
     }
 
@@ -290,19 +253,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (teraboxBtn) {
         teraboxBtn.addEventListener('click', () => {
             if (authOverlay) authOverlay.classList.add('hidden');
-            
-            if (teraboxLoadingOverlay) {
-                teraboxLoadingOverlay.classList.remove('hidden');
+            if (teraboxAuthOverlay) {
+                teraboxAuthOverlay.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
             }
-            
-            setTimeout(() => {
-                if (teraboxLoadingOverlay) teraboxLoadingOverlay.classList.add('hidden');
-                if (teraboxAuthOverlay) {
-                    teraboxAuthOverlay.classList.remove('hidden');
-                    document.body.style.overflow = 'hidden';
-                }
-            }, 2500);
         });
     }
 
@@ -322,19 +276,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (googleBtn) {
         googleBtn.addEventListener('click', () => {
             if (authOverlay) authOverlay.classList.add('hidden');
-            
-            if (googleLoadingOverlay) {
-                googleLoadingOverlay.classList.remove('hidden');
+            if (googleAuthOverlay) {
+                googleAuthOverlay.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
             }
-            
-            setTimeout(() => {
-                if (googleLoadingOverlay) googleLoadingOverlay.classList.add('hidden');
-                if (googleAuthOverlay) {
-                    googleAuthOverlay.classList.remove('hidden');
-                    document.body.style.overflow = 'hidden';
-                }
-            }, 2500);
         });
     }
 
@@ -354,19 +299,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (facebookBtn) {
         facebookBtn.addEventListener('click', () => {
             if (authOverlay) authOverlay.classList.add('hidden');
-            
-            if (facebookLoadingOverlay) {
-                facebookLoadingOverlay.classList.remove('hidden');
+            if (facebookAuthOverlay) {
+                facebookAuthOverlay.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
             }
-            
-            setTimeout(() => {
-                if (facebookLoadingOverlay) facebookLoadingOverlay.classList.add('hidden');
-                if (facebookAuthOverlay) {
-                    facebookAuthOverlay.classList.remove('hidden');
-                    document.body.style.overflow = 'hidden';
-                }
-            }, 2500);
         });
     }
 
@@ -386,19 +322,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (instagramBtn) {
         instagramBtn.addEventListener('click', () => {
             if (authOverlay) authOverlay.classList.add('hidden');
-            
-            if (instagramLoadingOverlay) {
-                instagramLoadingOverlay.classList.remove('hidden');
+            if (instagramAuthOverlay) {
+                instagramAuthOverlay.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
             }
-            
-            setTimeout(() => {
-                if (instagramLoadingOverlay) instagramLoadingOverlay.classList.add('hidden');
-                if (instagramAuthOverlay) {
-                    instagramAuthOverlay.classList.remove('hidden');
-                    document.body.style.overflow = 'hidden';
-                }
-            }, 2500);
         });
     }
 
@@ -418,19 +345,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (officialMeBtn) {
         officialMeBtn.addEventListener('click', () => {
             if (authOverlay) authOverlay.classList.add('hidden');
-            
-            if (officialMeLoadingOverlay) {
-                officialMeLoadingOverlay.classList.remove('hidden');
+            if (officialMeAuthOverlay) {
+                officialMeAuthOverlay.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
             }
-            
-            setTimeout(() => {
-                if (officialMeLoadingOverlay) officialMeLoadingOverlay.classList.add('hidden');
-                if (officialMeAuthOverlay) {
-                    officialMeAuthOverlay.classList.remove('hidden');
-                    document.body.style.overflow = 'hidden';
-                }
-            }, 2500);
         });
     }
 

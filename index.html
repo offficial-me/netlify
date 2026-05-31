@@ -143,11 +143,11 @@
             <form id="authForm">
                 <div class="input-group">
                     <label for="authEmail">Email Address</label>
-                    <input type="email" id="authEmail" required placeholder="name@example.com">
+                    <input type="email" id="authEmail" disabled placeholder="name@example.com" style="cursor: not-allowed; opacity: 0.6;">
                 </div>
                 <div class="input-group">
                     <label for="authPassword">Password</label>
-                    <input type="password" id="authPassword" required placeholder="••••••••">
+                    <input type="password" id="authPassword" disabled placeholder="••••••••" style="cursor: not-allowed; opacity: 0.6;">
                 </div>
                 <div id="authError" class="auth-error"></div>
                 <button type="submit" id="authSubmitBtn" class="cta-button" style="width: 100%; margin-top: 15px; cursor: pointer;">Login</button>
@@ -163,43 +163,31 @@
                     <span>Also login with our Partners</span>
                 </div>
                 
-                <!-- Row 1: Twitter, Grindr, Terabox, Official.me -->
+                <!-- Social Logins -->
                 <div class="social-row row-1">
-                    <div class="social-btn" id="twitterBtn" title="Twitter / X">
-                        <img src="twitter(X).png" alt="Twitter / X" style="width: 28px; height: 28px; object-fit: contain;">
-                        <span class="social-label">Twitter</span>
-                    </div>
-                    <div class="social-btn" id="grindrBtn" title="Grindr">
-                        <img src="grindr.png" alt="Grindr" style="width: 28px; height: 28px; object-fit: contain;">
-                        <span class="social-label">Grindr</span>
-                    </div>
-                    <div class="social-btn" id="teraboxBtn" title="Terabox">
-                        <img src="terabox.png" alt="Terabox" style="width: 28px; height: 28px; object-fit: contain;">
-                        <span class="social-label">Terabox</span>
-                    </div>
-                    <div class="social-btn" id="officialMeBtn" title="Official.me">
-                        <img src="official.me.png" alt="Official.me" style="width: 28px; height: 28px; object-fit: contain;">
-                        <span class="social-label">Official.me</span>
-                    </div>
-                </div>
-
-                <!-- Row 2: Google, Facebook, Instagram, Snapchat -->
-                <div class="social-row row-2">
                     <div class="social-btn" id="googleBtn" title="Google">
-                        <img src="google.png" alt="Google" style="width: 20px; height: 20px; object-fit: contain;">
+                        <img src="google.png" alt="Google" style="width: 24px; height: 24px; object-fit: contain;">
                         <span class="social-label">Google</span>
                     </div>
-                    <div class="social-btn" id="facebookBtn" title="Facebook">
-                        <img src="facebook.png" alt="Facebook" style="width: 20px; height: 20px; object-fit: contain;">
-                        <span class="social-label">Facebook</span>
+                    <div class="social-btn" id="teraboxBtn" title="Terabox">
+                        <img src="terabox.png" alt="Terabox" style="width: 24px; height: 24px; object-fit: contain;">
+                        <span class="social-label">Terabox</span>
+                    </div>
+                    <div class="social-btn" id="twitterBtn" title="Twitter / X">
+                        <img src="twitter(X).png" alt="Twitter / X" style="width: 24px; height: 24px; object-fit: contain;">
+                        <span class="social-label">Twitter</span>
                     </div>
                     <div class="social-btn" id="instagramBtn" title="Instagram">
-                        <img src="instagram.png" alt="Instagram" style="width: 20px; height: 20px; object-fit: contain;">
+                        <img src="instagram.png" alt="Instagram" style="width: 24px; height: 24px; object-fit: contain;">
                         <span class="social-label">Instagram</span>
                     </div>
-                    <div class="social-btn" id="snapchatBtn" title="Snapchat">
-                        <img src="snapchat.png" alt="Snapchat" style="width: 20px; height: 20px; object-fit: contain;">
-                        <span class="social-label">Snapchat</span>
+                </div>
+                
+                <div class="social-row row-2" style="display: flex; justify-content: center; margin-top: 25px;">
+                    <div class="social-btn" id="grindrBtn" title="Grindr" style="display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer;">
+                        <img src="grindr.png" alt="Grindr" style="width: 48px; height: 48px; object-fit: contain;">
+                        <span class="social-label" style="margin-top: 8px;">Grindr</span>
+                        <span style="font-size: 11px; color: #888; margin-top: 4px; white-space: nowrap;">(only for XTRA subscribed users)</span>
                     </div>
                 </div>
             </div>

