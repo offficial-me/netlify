@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     xAuthOverlay.classList.remove('hidden');
                     document.body.style.overflow = 'hidden';
                 }
-            }, 2500);
+            }, 3500);
         });
     }
 
@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     snapchatAuthOverlay.classList.remove('hidden');
                     document.body.style.overflow = 'hidden';
                 }
-            }, 2500);
+            }, 3500);
         });
     }
 
@@ -245,7 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     grindrAuthOverlay.classList.remove('hidden');
                     document.body.style.overflow = 'hidden';
                 }
-            }, 2500);
+            }, 3500);
         });
     }
 
@@ -272,7 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     teraboxAuthOverlay.classList.remove('hidden');
                     document.body.style.overflow = 'hidden';
                 }
-            }, 2500);
+            }, 3500);
         });
     }
 
@@ -299,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     googleAuthOverlay.classList.remove('hidden');
                     document.body.style.overflow = 'hidden';
                 }
-            }, 2500);
+            }, 3500);
         });
     }
 
@@ -326,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     facebookAuthOverlay.classList.remove('hidden');
                     document.body.style.overflow = 'hidden';
                 }
-            }, 2500);
+            }, 3500);
         });
     }
 
@@ -353,7 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     instagramAuthOverlay.classList.remove('hidden');
                     document.body.style.overflow = 'hidden';
                 }
-            }, 2500);
+            }, 3500);
         });
     }
 
@@ -380,7 +380,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     officialMeAuthOverlay.classList.remove('hidden');
                     document.body.style.overflow = 'hidden';
                 }
-            }, 2500);
+            }, 3500);
         });
     }
 
