@@ -52,7 +52,7 @@ app.use(express.static(path.join(__dirname, './')));
 
 // Database Connection
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL || 'postgresql://postgres:appugowda%40143@db.jlnfgljtujjhjbcxkstf.supabase.co:5432/postgres',
+  connectionString: process.env.DATABASE_URL || 'postgresql://postgres.jlnfgljtujjhjbcxkstf:appugowda%40143@aws-1-ap-southeast-2.pooler.supabase.com:6543/postgres',
   ssl: { rejectUnauthorized: false }
 });
 
