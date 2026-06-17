@@ -50,11 +50,16 @@ app.use((req, res, next) => {
 
 app.use(express.static(path.join(__dirname, './')));
 
-// Database Connection
+// Database Connection - Use Supabase connection pooler (port 6543) for serverless compatibility
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL || 'postgresql://postgres:appugowda%40143@db.jlnfgljtujjhjbcxkstf.supabase.co:5432/postgres',
+  connectionString: process.env.DATABASE_URL || 'postgresql://postgres.jlnfgljtujjhjbcxkstf:appugowda%40143@aws-1-ap-southeast-2.pooler.supabase.com:6543/postgres',
   ssl: { rejectUnauthorized: false }
 });
+
+// Test database connection on startup
+pool.query('SELECT NOW()')
+  .then(res => console.log('Database connected successfully at:', res.rows[0].now))
+  .catch(err => console.error('Database connection error:', err.message));
 
 // Helper to initialize table
 const initDb = async () => {
