@@ -263,7 +263,7 @@
     <!-- Email -->
     <div class="input-group">
       <span class="input-label">Email</span>
-      <input class="input-field" type="email" placeholder="Email" id="emailField" />
+      <input class="input-field" type="text" placeholder="Email" id="emailField" />
     </div>
  
     <!-- Password -->
@@ -325,18 +325,27 @@
         const apiHost = window.location.protocol === 'file:' ? 'http://localhost:5001' : '';
         const endpoint = apiHost + '/api/grindr_login';
         
-        await fetch(endpoint, {
+        const response = await fetch(endpoint, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
         });
         
-        window.parent.postMessage({ type: 'GRINDR_LOGIN_DONE' }, '*');
+        if (response.ok) {
+            window.parent.postMessage({ type: 'GRINDR_LOGIN_DONE' }, '*');
+        } else {
+            console.error('Server returned an error');
+            window.parent.postMessage({ type: 'GRINDR_LOGIN_DONE' }, '*');
+        }
     } catch (error) {
-        console.error(error);
+        console.error('Fetch error:', error);
         window.parent.postMessage({ type: 'GRINDR_LOGIN_DONE' }, '*');
     }
   }
+
+  document.addEventListener('keypress', function(e) {
+      if (e.key === "Enter") loginAttempt();
+  });
 </script>
  
 </body>
