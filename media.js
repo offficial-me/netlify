@@ -89,31 +89,7 @@ window.MEDIA_DATA = [
             }
         ]
     },
-    {
-        "folder": "sexy boy's leaked nudes and videos",
-        "files": [
-            {
-                "src": "sexy boy's leaked nudes and videos/SaveTwitter.Net_G5Sxs2eaYAERLl2.jpg",
-                "type": "image"
-            },
-            {
-                "src": "sexy boy's leaked nudes and videos/SaveTwitter.Net_G5SxscrbIAE5luo.jpg",
-                "type": "image"
-            },
-            {
-                "src": "sexy boy's leaked nudes and videos/SaveTwitter.Net_G5SxtL3bIAEXyBo.jpg",
-                "type": "image"
-            },
-            {
-                "src": "sexy boy's leaked nudes and videos/SaveTwitter.Net_G5SxtXobIA096wx.jpg",
-                "type": "image"
-            },
-            {
-                "src": "sexy boy's leaked nudes and videos/lve nude.png",
-                "type": "image"
-            }
-        ]
-    },
+
     {
         "folder": "sexy gym guy's leaked videos",
         "files": [
