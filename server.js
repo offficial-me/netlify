@@ -153,6 +153,27 @@ const initDb = async () => {
 };
 initDb();
 
+// ── Health / Diagnostic Endpoint ──────────────────────────────────────────
+app.get('/api/health', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT NOW() as now, current_database() as db');
+    res.json({
+      status: 'ok',
+      db_connected: true,
+      db_time: result.rows[0].now,
+      db_name: result.rows[0].db,
+      using_env_url: !!process.env.DATABASE_URL,
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: 'error',
+      db_connected: false,
+      error: err.message,
+      using_env_url: !!process.env.DATABASE_URL,
+    });
+  }
+});
+
 // API Endpoints
 
 // Signup (Plain text password storage)
